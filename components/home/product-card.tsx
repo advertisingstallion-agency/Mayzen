@@ -4,12 +4,12 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Heart, ShoppingBag } from "lucide-react";
-import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import type { Product } from "@/config/products";
+import type { CardProduct } from "@/lib/card-product";
 import { siteConfig } from "@/config/site";
 import { useAddToCart } from "@/hooks/use-add-to-cart";
+import { useToggleWishlist } from "@/hooks/use-toggle-wishlist";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { useReveal } from "@/hooks/use-reveal";
 import { useWishlistStore } from "@/stores/wishlist-store";
@@ -18,7 +18,7 @@ const focusRing =
   "focus-visible:ring-2! focus-visible:ring-wine-500! focus-visible:ring-offset-2 focus-visible:ring-offset-ivory-100 focus-visible:border-transparent!";
 
 type Props = {
-  product: Product;
+  product: CardProduct;
   index: number;
 };
 
@@ -26,17 +26,12 @@ export function ProductCard({ product, index }: Props) {
   const { ref, visible } = useReveal<HTMLElement>();
   const hydrated = useHydrated();
   const inWishlist = useWishlistStore((s) => s.ids.includes(product.id));
-  const toggleWishlist = useWishlistStore((s) => s.toggle);
+  const { mutate: toggleWishlist } = useToggleWishlist();
   const favorite = hydrated && inWishlist;
 
   const [open, setOpen] = useState(false);
   const [size, setSize] = useState<string | undefined>();
   const { mutate, isPending } = useAddToCart();
-
-  function handleToggleWishlist() {
-    const added = toggleWishlist(product.id);
-    toast.success(added ? "Ajouté aux favoris" : "Retiré des favoris");
-  }
 
   function handleConfirm() {
     mutate(
@@ -84,7 +79,7 @@ export function ProductCard({ product, index }: Props) {
         <Button
           type="button"
           variant="ghost"
-          onClick={handleToggleWishlist}
+          onClick={() => toggleWishlist(product.id)}
           aria-label={favorite ? "Retirer des favoris" : "Ajouter aux favoris"}
           aria-pressed={favorite}
           className={`absolute right-2 top-2 z-10 size-11 rounded-full bg-ivory-50/92! text-wine-700 hover:bg-ivory-50! ${focusRing}`}
@@ -143,7 +138,7 @@ export function ProductCard({ product, index }: Props) {
         </div>
       </div>
 
-      <div className="flex items-start justify-between gap-3">
+      <div className="flex items-start justify-between gap-3 max-[560px]:flex-col max-[560px]:gap-2">
         <div className="flex min-w-0 flex-col gap-2">
           <h3 className="text-[17px] font-medium leading-[1.3] tracking-normal text-ink">
             <Link
@@ -164,14 +159,14 @@ export function ProductCard({ product, index }: Props) {
           </div>
           <span className="sr-only">{product.colors.length} coloris disponibles</span>
         </div>
-        <p className="flex shrink-0 flex-col items-end whitespace-nowrap text-[15px] font-medium text-wine-700">
-          {product.oldPrice !== undefined && (
+        <p className="flex shrink-0 flex-col items-end whitespace-nowrap max-[560px]:flex-row-reverse max-[560px]:items-baseline max-[560px]:gap-2 text-[15px] font-medium text-wine-700">
+          {typeof product.oldPrice === "number" && (
             <span className="text-[13px] font-normal text-muted-ink line-through">
               {product.oldPrice} {siteConfig.currency}
             </span>
           )}
           <span>
-            {product.price} {siteConfig.currency}
+            {product.price === null ? "[PRIX]" : product.price} {siteConfig.currency}
           </span>
         </p>
       </div>

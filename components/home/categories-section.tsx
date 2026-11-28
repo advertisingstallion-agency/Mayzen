@@ -38,7 +38,7 @@ export function CategoriesSection() {
           <Button
             variant="link"
             nativeButton={false}
-            render={<Link href="/collections" />}
+            render={<Link href="/boutique" />}
             className="h-11 gap-2 px-0 text-[13px] font-medium uppercase tracking-[0.08em] text-wine-700 underline underline-offset-[6px] [&_svg]:size-4 [&_svg]:stroke-[1.5]"
           >
             Toute la collection

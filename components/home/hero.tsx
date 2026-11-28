@@ -36,7 +36,7 @@ export function Hero() {
               variant="light"
               size="brand"
               nativeButton={false}
-              render={<Link href="/collections" />}
+              render={<Link href="/boutique" />}
             >
               Découvrir la collection
               <ArrowRight />
@@ -45,7 +45,7 @@ export function Hero() {
               variant="outline-light"
               size="brand"
               nativeButton={false}
-              render={<Link href="/collections/pyjamas" />}
+              render={<Link href="/boutique?categorie=pyjamas" />}
             >
               Pyjamas &amp; ensembles
             </Button>

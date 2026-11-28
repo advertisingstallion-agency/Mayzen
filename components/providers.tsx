@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+import { lenisRef } from "@/lib/lenis";
 import { Toaster } from "@/components/ui/sonner";
 import { useCartStore } from "@/stores/cart-store";
 import { useWishlistStore } from "@/stores/wishlist-store";
@@ -13,7 +14,11 @@ function SmoothScroll() {
     const query = window.matchMedia("(prefers-reduced-motion: reduce)");
     if (query.matches) return;
     const lenis = new Lenis({ autoRaf: true });
-    return () => lenis.destroy();
+    lenisRef.current = lenis;
+    return () => {
+      lenisRef.current = null;
+      lenis.destroy();
+    };
   }, []);
   return null;
 }
@@ -33,7 +38,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <QueryClientProvider client={queryClient}>
       <SmoothScroll />
       {children}
-      <Toaster theme="light" position="top-center" />
+      <Toaster />
     </QueryClientProvider>
   );
 }

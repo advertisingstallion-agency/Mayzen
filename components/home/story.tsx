@@ -18,7 +18,7 @@ type DayCard = {
 
 const cards: DayCard[] = [
   {
-    href: "/collections/ensembles",
+    href: "/boutique?categorie=ensembles",
     image: "/images/product-ensemble.jpg",
     position: "object-[center_20%]",
     icon: Sunrise,
@@ -30,7 +30,7 @@ const cards: DayCard[] = [
     pill: "left-4 top-4",
   },
   {
-    href: "/collections/abayas",
+    href: "/boutique?categorie=abayas",
     image: "/images/story-journee.jpg",
     position: "object-top",
     icon: Sun,
@@ -43,7 +43,7 @@ const cards: DayCard[] = [
     pill: "left-1/2 top-14 -translate-x-1/2",
   },
   {
-    href: "/collections/pyjamas",
+    href: "/boutique?categorie=pyjamas",
     // Temporary photo: replace with the evening photo when it exists.
     image: "/images/story-matin.jpg",
     position: "object-center",
@@ -64,6 +64,7 @@ const badgeText = "PUDIQUE • ÉLÉGANTE • AU QUOTIDIEN •";
 export function Story() {
   return (
     <section
+      id="histoire"
       aria-labelledby="story-title"
       className="relative overflow-hidden bg-wine-700 py-[56px] text-ivory-100 min-[700px]:py-[80px]"
     >
@@ -114,7 +115,7 @@ export function Story() {
               variant="light"
               size="brand"
               nativeButton={false}
-              render={<Link href="/a-propos" />}
+              render={<Link href="/#pourquoi" />}
             >
               Découvrir Meyla
               <ArrowRight aria-hidden="true" />

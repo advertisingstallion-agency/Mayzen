@@ -33,12 +33,12 @@ export function Navbar() {
   const count = useCartCount();
 
   return (
-    <header className="sticky top-0 z-40 h-[72px] border-b border-ivory-100/15 bg-wine-700 text-ivory-100">
+    <header className="sticky top-0 z-40 h-[72px] border-b border-ivory-100/15 bg-wine-700 text-white">
       <div className="mx-auto grid h-full max-w-[1440px] grid-cols-[1fr_auto_1fr] items-center px-6 min-[1100px]:px-12">
         <div className="flex items-center">
           <nav
             aria-label="Navigation principale"
-            className="hidden items-center gap-7 min-[1100px]:flex"
+            className="hidden items-center gap-7 min-[1100px]:-ml-11 min-[1100px]:flex"
           >
             {navLinks.map((link) => (
               <Link
@@ -47,7 +47,7 @@ export function Navbar() {
                 className="group relative py-2 text-[13px] font-medium uppercase tracking-[0.08em] outline-none focus-visible:ring-2 focus-visible:ring-blush-300"
               >
                 {link.label}
-                <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-ivory-100 transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+                <span className="absolute inset-x-0 bottom-0 h-px origin-left scale-x-0 bg-white transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
               </Link>
             ))}
           </nav>
@@ -60,6 +60,7 @@ export function Navbar() {
                     variant="nav"
                     size="icon-nav"
                     aria-label="Ouvrir le menu"
+                    className="-ml-2.5 text-white! hover:bg-white/10! focus-visible:ring-blush-300/60!"
                   />
                 }
               >
@@ -134,7 +135,7 @@ export function Navbar() {
             width={728}
             height={348}
             priority
-            className="h-[50px] w-auto"
+            className="h-[50px] w-auto brightness-0 invert"
           />
         </Link>
 
@@ -144,7 +145,7 @@ export function Navbar() {
             size="icon-nav"
             aria-label="Mes favoris"
             nativeButton={false}
-            className="hidden min-[700px]:inline-flex"
+            className="hidden min-[700px]:inline-flex text-white! hover:bg-white/10! focus-visible:ring-blush-300/60!"
             render={<Link href="/favoris" />}
           >
             <Heart />
@@ -158,7 +159,7 @@ export function Navbar() {
                 : "Panier"
             }
             nativeButton={false}
-            className="relative"
+            className="relative text-white! hover:bg-white/10! focus-visible:ring-blush-300/60!"
             render={<Link href="/panier" />}
           >
             <ShoppingBag />

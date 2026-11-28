@@ -99,7 +99,7 @@ export function NewArrivalsSection() {
             variant="outline-wine"
             size="brand"
             nativeButton={false}
-            render={<Link href="/nouveautes" />}
+            render={<Link href="/boutique" />}
           >
             Voir toutes les nouveautés
             <ArrowRight />
