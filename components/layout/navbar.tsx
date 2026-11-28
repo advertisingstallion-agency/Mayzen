@@ -38,7 +38,7 @@ export function Navbar() {
         <div className="flex items-center">
           <nav
             aria-label="Navigation principale"
-            className="hidden items-center gap-7 min-[1100px]:-ml-11 min-[1100px]:flex"
+            className="hidden items-center gap-7 min-[1100px]:-ml-4 min-[1100px]:flex"
           >
             {navLinks.map((link) => (
               <Link
